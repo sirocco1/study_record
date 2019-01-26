@@ -1,0 +1,46 @@
+<h2>プロフィール編集画面</h2>
+<%= form_for(@user) do |f| %>
+	<%= render 'layouts/errors', er: @user %>
+
+	<div class="field">
+		<%= f.label :お名前, class: "text-danger" %><span>  (12文字以内)</span>
+		<br>
+		<%= f.text_field :name, placeholder: "必須" %>
+	</div>
+	<div class="field">
+		<%= f.label :学習項目, class: "text-danger" %><span>  (12文字以内)</span>
+		<br>
+		<%= f.text_field :study_item, placeholder: "必須" %>
+	</div>
+	<div class="field">
+		<%= f.label :プロフ画像 %>
+		<%= f.attachment_field :profile_image %>
+	</div>
+	<div class="field">
+		<%= f.label :生年月日 %>
+		<br>
+		<%= f.date_field :birthday %>
+	</div>
+	<div class="field">
+		<%= f.label :年齢 %><span>  (3桁まで)</span>
+		<br>
+		<%= f.number_field :age %>
+	</div>
+	<div class="field">
+		<%= f.label :出身 %><span>  (12文字以内)</span>
+		<br>
+		<%= f.text_field :hometown %>
+	</div>
+	<div class="field">
+		<label><%= f.radio_button :gender, "男" %> 男　</label>
+		<label><%= f.radio_button :gender, "女" %> 女　</label>
+	</div>
+	<div class="field">
+		<%= f.label :自己紹介 %><span>  (200文字以内)</span>
+		<br>
+		<%= f.text_area :body %>
+	</div>
+	<div class="actions">
+		<%= f.submit :編集 %>
+	</div>
+<% end %>

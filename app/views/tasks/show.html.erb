@@ -1,0 +1,24 @@
+<div class="row">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>日付</th>
+					<th>学習時間</th>
+					<<th>作業内容</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr>
+					<td><%= @task.day %></td>
+					<td><%= @task.study_time %></td>
+					<td><%= @task.study_body %></td>
+				<% if @task.user == current_user %>
+					<td><%= link_to "Edit",edit_task_path(@task), class: "btn-sm btn-success" %></td>
+					<td><%= link_to "Destroy",@task, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></td>
+				<% end %>
+				</tr>
+			</tbody>
+		</table>
+</div>

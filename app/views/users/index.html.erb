@@ -1,0 +1,36 @@
+<h1>登録者一覧</h1>
+
+<%= search_form_for(@search, method: :get)  do |f| %> <!--検索機能-->
+  <div class="form-group form-inline"> <!--inlineで横並び -->
+    <%= f.label :name_cont, "名前" %>
+    <%= f.text_field :name_cont, class: "form-control",placeholder: "部分一致"%>
+    <%= f.label :study_item_cont, "学習項目" %>
+    <%= f.text_field :study_item_cont, class: "form-control",placeholder: "部分一致"%>
+  <%= f.submit "検索" %>
+  </div>
+<% end %>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>画像</th>
+			<th>お名前</th>
+			<th>年齢</th>
+			<th>性別</th>
+			<th>出身</th>
+			<th>学習項目</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @users.each do |user| %>
+		<tr>
+			<td><%= attachment_image_tag(user, :profile_image, fallback: "no_image.jpg",size: '40x40') %></td>
+			<td><%= link_to user.name,user%></td>
+			<td><%= user.age%>歳</td>
+			<td><%= user.gender%></td>
+			<td><%= user.hometown%></td>
+			<td><%= user.study_item%></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

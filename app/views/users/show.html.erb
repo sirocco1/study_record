@@ -1,0 +1,104 @@
+<div class="row">
+
+	<div class="col-xs-3">
+    	<br>
+    	<br>
+			<table class="table" style="table-layout: fixed;">
+				<tr><%= attachment_image_tag(@user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></tr>
+				<tr>
+					<th>お名前</th>
+					<th><%= @user.name %></th>
+				</tr>
+				<tr>
+					<th>学習項目</th>
+					<th><%= @user.study_item %></th>
+				</tr>
+				<tr>
+					<th>生年月日</th>
+					<th><%= @user.birthday %></th>
+				</tr>
+				<tr>
+					<th>年齢</th>
+					<th><%= @user.age %>歳</th>
+				</tr>
+				<tr>
+					<th>性別</th>
+					<th><%= @user.gender %></th>
+				</tr>
+				<tr>
+					<th>出身</th>
+					<th><%= @user.hometown %></th>
+				</tr>
+				<tr>
+					<th>自己紹介</th>
+					<th><%= @user.body %></th>
+				</tr>
+			</table>
+
+			<% if @user == current_user %>
+			<%= link_to 'プロフィール編集はこちら',edit_user_path(@user) %>
+			<% end %>
+
+			<%= render 'layouts/errors', er: @task %>
+			<% if @user == current_user %>
+				<div class="border text-center">
+					<h3>新規投稿</h3>
+					<%= form_for @task do |f| %>
+						<div class="field row">
+							<%= f.label :日付 %>
+							<br>
+							<%= f.date_field :day %>
+						</div>
+						<div class="field row">
+							<%= f.label :学習時間 %>
+								<br>
+							<%= f.text_field :study_time, placeholder: "※半角数値のみで入力" %>
+						</div>
+						<div class="field row">
+							<%= f.label :作業内容 %>
+							<br>
+							<%= f.text_area :study_body, placeholder: "※90文字以内まで" %>
+						</div>
+						<br>
+						<div class="actions row">
+							<%= f.submit class: "btn btn-primary col-md-8 col-md-offset-2" %>
+						</div>
+						<br>
+					<% end %>
+				</div>
+			<% end %>
+
+	</div>
+
+	<div class="col-xs-9">
+		<br>
+		<h2>〜学習記録〜<span class="pull-right">合計<%= @total%>時間</span></h2>
+
+			<div class="row">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class ="col-xs-2">日付</th>
+							<th class ="col-xs-2">学習時間</th>
+							<th class ="col-xs-6">作業内容</th>
+							<th class ="col-xs-2"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @tasks.each do |task| %>
+							<tr>
+								<td><%= task.day %></td>
+								<td><%= task.study_time %>時間</td>
+								<td><%= task.study_body %></td>
+							<% if @user == current_user %>
+								<td><%= link_to '編集・削除',task_path(task.id) %></td>
+							<% end %>
+							</tr>
+						<% end %>
+					</tbody>
+				</table>
+				<%= paginate @tasks %>
+			</div>
+	</div>
+
+</div>
