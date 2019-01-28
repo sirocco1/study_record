@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :tasks, dependent: :destroy
   validates :name, presence: true, length: {maximum: 12}
-  validates :study_item, presence: true, length: {maximum: 12}
+  validates :study_item, length: {maximum: 12}
   validates :age, length: {maximum: 3}
   validates :hometown,length: {maximum: 12}
   validates :body,length: {maximum: 200}
